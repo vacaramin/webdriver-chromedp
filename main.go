@@ -9,7 +9,6 @@ import (
 )
 
 func main() {
-	// Create a new context
 	ctx, cancel := chromedp.NewContext(context.Background())
 	defer cancel()
 
@@ -18,15 +17,15 @@ func main() {
 	defer cancel()
 
 	// Navigate to the website
-	err := chromedp.Run(ctx, navigateToWebsite())
+	err := chromedp.Run(ctx, navigateToWebsite("https://www.dezlearn.com/nested-iframes-example/"))
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
-func navigateToWebsite() chromedp.Tasks {
+func navigateToWebsite(url string) chromedp.Tasks {
 	return chromedp.Tasks{
-		chromedp.Navigate("https://www.dezlearn.com/nested-iframes-example/"),
+		chromedp.Navigate(url),
 		chromedp.Sleep(2 * time.Second), // Wait for the website to load (optional)
 
 		// Accessing nested iframes
